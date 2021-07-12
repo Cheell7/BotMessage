@@ -4,7 +4,6 @@ const emojis = require('../../config/emojis.json');
 const { Discord, MessageEmbed, MessageCollector } = require("discord.js");
 const cor = require('colors');
 let tempo = 20000;
-let botMessage = [];
 
 module.exports = {
     name: "mensagens",
@@ -43,13 +42,11 @@ module.exports = {
             message.channel.send(embedconfig);
             console.log(cor.cyan('Mensagem: ') + cor.gray(`${message.content}`));
 
-            if(botMessage){ 
-                const EndMsg = new MessageEmbed()
-                    .setColor(logs)
-                    .setDescription(message.content)
-                    .setFooter(message.author.username + ` (${message.author.id})`)
-                return client.channels.cache.get(cmdUsing).send(EndMsg);
-            }
+            const EndMsg = new MessageEmbed()
+                .setColor(logs)
+                .setDescription(message.content)
+                .setFooter(message.author.username + ` (${message.author.id})`)
+            return client.channels.cache.get(cmdUsing).send(EndMsg);
         });
         
         collector.on('end', collected => {
